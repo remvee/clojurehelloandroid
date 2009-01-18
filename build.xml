@@ -167,11 +167,16 @@
     <!-- compile clojure classes -->
     <target name="c-compile" depends="dirs, resource-src, j-compile">
       <echo>Compiling clojure code...</echo>
-      <exec executable="java" failonerror="true">
+      <apply taskname="clj" executable="java" failonerror="true">
 	<arg value="-classpath" />
         <arg path="${srcdir}:${outdir-classes}:${external-libs}/clojure.jar:${android-jar}" />
-        <arg line="clojure.lang.Script compile.clj" />
-      </exec>
+        <arg line="clojure.lang.Script compile.clj --" />
+        <arg file="${srcdir}" />
+        <arg file="${outdir-classes}" />
+        <fileset dir="${srcdir}">
+          <include name="**/*.clj" />
+        </fileset>
+      </apply>
     </target>
 
     <target name="compile" depends="j-compile, c-compile" />
