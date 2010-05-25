@@ -7,5 +7,5 @@
   (.superOnCreate this bundle)
   (.setContentView this net.remvee.android.hello.R$layout/main)
   (let [tv (new android.widget.TextView this)]
-    (.setText tv "Hello Android from Clojure!")
+    (.setText tv (str "Hello Android from Clojure " (clojure-version) "!"))
     (.setContentView this tv)))
